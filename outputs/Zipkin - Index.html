@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<!-- saved from url=(0201)http://localhost:9411/zipkin/?serviceName=file+system%2F172.21.0.3&spanName=all&lookback=3600000&startTs=1550043470185&endTs=1550047070185&annotationQuery=&minDuration=&limit=10&sortOrder=duration-desc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--
+      add 'base' tag to work around the fact that 'html-webpack-plugin' does not work
+      with '__webpack_public_path__' being set as reported at https://github.com/jantimon/html-webpack-plugin/issues/119
+    -->
+    <!--<base href="/zipkin/">--><base href=".">
+
+    <link rel="icon" type="image/x-icon" href="http://localhost:9411/zipkin/favicon.ico">
+
+    
+    <title>Zipkin - Index</title>
+  <link href="./Zipkin - Index_files/app-14db66884dea8a1b8a4e.min.css" rel="stylesheet"></head>
+  <body>  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand ml-5" href="http://localhost:9411/zipkin/">
+          <img src="./Zipkin - Index_files/zipkin-logo-200x119.jpg" width="60" height="40" class="d-inline-block align-top rounded" alt="">
+            <span class="font-weight-light navbar-text" style="font-size: .75em;" data-i18n="nav.inves">Investigate system behavior</span>
+          </a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item" data-route="index"><a class="nav-link" href="http://localhost:9411/zipkin/" data-i18n="nav.find">Find a trace</a></li>
+            <li class="nav-item" data-route="traceViewer"><a class="nav-link" href="http://localhost:9411/zipkin/traceViewer" data-i18n="nav.viewSaved">View Saved Trace</a></li>
+            <li class="nav-item" data-route="dependency"><a class="nav-link" href="http://localhost:9411/zipkin/dependency/" data-i18n="nav.dep">Dependencies</a></li>
+          </ul>
+        </div>
+          <form id="traceIdQueryForm" class="form-inline my-2 my-lg-0 mr-5">
+            <input class="form-control mr-sm-2" type="search" aria-label="Search" id="traceIdQuery" name="traceIdQuery" placeholder="Go to trace" data-i18n="nav.search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" data-i18n="nav.searchButton">Search</button>
+            <span class="navbar-text badge badge-dark" id="environment"></span>
+          </form>
+    </nav>
+  <div class="container-fluid">
+    <div id="errorPanel" class="alert alert-danger">
+    </div>
+
+    <div class="content border-dark mb-3"><div class="card bg-light text-dark border-dark mb-3 w-90">
+  <form role="form" id="submitForm" class="card-body">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="timeStamp" data-i18n="traces.servicename">Service Name</label>
+        <div class="clearfix">
+          <select data-placeholder="Service Name" class="form-control form-control-chosen" name="serviceName" id="serviceName" style="display: none;"><option value="all">all</option><option value="file system/172.21.0.3" selected="selected">file system/172.21.0.3</option><option value="fsclient/172.21.0.3">fsclient/172.21.0.3</option><option value="sample/172.21.0.3">sample/172.21.0.3</option><option value="yarn client/172.21.0.3">yarn client/172.21.0.3</option><option value="yarnappsample/172.21.0.3">yarnappsample/172.21.0.3</option></select><div class="chosen-container chosen-container-single" title="" id="serviceName_chosen" style="width: 339px;"><a class="chosen-single">
+  <span>file system/172.21.0.3</span>
+  <div><b></b></div>
+</a>
+<div class="chosen-drop">
+  <div class="chosen-search">
+    <input class="chosen-search-input" type="text" autocomplete="off">
+  </div>
+  <ul class="chosen-results"></ul>
+</div></div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="timeStamp" data-i18n="traces.spanname">Span Name</label>
+        <div class="clearfix">
+          <select data-placeholder="Span Name" class="form-control-chosen" name="spanName" id="spanName" style="display: none;"><option value="all">all</option><option value="clientnamenodeprotocol#getserverdefaults">clientnamenodeprotocol#getserverdefaults</option><option value="fs read line by line">fs read line by line</option><option value="fs read line by line with header and offsets">fs read line by line with header and offsets</option><option value="fs write">fs write</option></select><div class="chosen-container chosen-container-single" title="" id="spanName_chosen" style="width: 22px;"><a class="chosen-single">
+  <span>all</span>
+  <div><b></b></div>
+</a>
+<div class="chosen-drop">
+  <div class="chosen-search">
+    <input class="chosen-search-input" type="text" autocomplete="off">
+  </div>
+  <ul class="chosen-results"></ul>
+</div></div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="lookback" data-i18n="traces.lookback">Lookback</label>
+        <div class="clearfix">
+          <select class="form-control" name="lookback" id="lookback">
+            <option value="3600000" data-i18n="traces.lookback.1hour">1 hour</option>
+            <option value="10800000" data-i18n="traces.lookback.3hours">3 hours</option>
+            <option value="21600000" data-i18n="traces.lookback.6hours">6 hours</option>
+            <option value="43200000" data-i18n="traces.lookback.12hours">12 hours</option>
+            <option value="86400000" data-i18n="traces.lookback.1day">1 day</option>
+            <option value="172800000" data-i18n="traces.lookback.2days">2 days</option>
+            <option value="604800000" data-i18n="traces.lookback.7days">7 days</option>
+            <option value="custom" data-i18n="traces.lookback.custom">Custom</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row" id="custom-lookback" style="display: none;">
+      <div class="col-md-6"></div>
+
+      <div id="start-ts" class="form-group col-md-3">
+        <label for="timeStamp" data-i18n="traces.stime">Start time</label>
+        <div>
+          <input class="form-control input-sm date-input" type="text">
+          <input class="form-control input-sm time-input" type="text">
+          <input class="timestamp-value" id="startTs" name="startTs" type="hidden" value="1550043470185">
+        </div>
+      </div>
+
+      <div id="end-ts" class="form-group col-md-3">
+        <label for="timeStamp" data-i18n="traces.etime">End time</label>
+        <div>
+          <input class="form-control input-sm date-input" type="text">
+          <input class="form-control input-sm time-input" type="text">
+          <input class="timestamp-value" id="endTs" name="endTs" type="hidden" value="1550047070185">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="annotationQuery" data-i18n="traces.annotationQuery">Annotation Query</label>
+        <div class="clearfix">
+          <input type="text" class="form-control input-sm" id="annotationQuery" name="annotationQuery" value="" style="width: 100%" placeholder="For example: http.path=/foo/bar/ and cluster=foo and cache.miss">
+        </div>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="minDuration" data-i18n="traces.duration">Duration (μs) &gt;=</label>
+        <input class="form-control input-sm" id="minDuration" name="minDuration" type="text" value="" placeholder="Ex: 100ms or 5s">
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="limit" data-i18n="traces.limit">Limit</label>
+        <input class="form-control input-sm" id="limit" name="limit" type="text" value="10">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="sortOrder" data-i18n="traces.sort">Sort</label>
+        <select class="sort-order js-sort-order form-control" form="submitForm" name="sortOrder" id="sortOrder">
+            <option value="service-percentage-desc" data-i18n="service-percentage-desc">Service Percentage: Longest First</option>            <option value="service-percentage-asc" data-i18n="service-percentage-asc">Service Percentage: Shortest First</option>            <option value="duration-desc" selected="" data-i18n="duration-desc">Longest First</option>            <option value="duration-asc" data-i18n="duration-asc">Shortest First</option>            <option value="timestamp-desc" data-i18n="timestamp-desc">Newest First</option>            <option value="timestamp-asc" data-i18n="timestamp-asc">Oldest First</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary btn-lg" data-i18n="traces.findBtn">Find Traces</button>
+        <button type="button" class="btn btn-outline-info info-request">
+          <span class="fas fa-question-circle"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="trace-filters" class="row">
+      <div class="col-md-11">
+        <div>
+          Showing:  <span class="filter-current">10</span>
+          of <span class="filter-total">10</span>
+        </div>
+
+        <div class="service-tags">
+          Services:
+          <span class="badge badge-info" data-service-name="file system/172.21.0.3">file system/172.21.0.3</span>
+        </div>
+      </div>
+
+      <div class="col-md-1 float-right">
+        <a href="http://localhost:9411/zipkin/api/v2/traces?limit=10&amp;lookback=3600000&amp;serviceName=file%20system%2F172.21.0.3" "="" class="btn btn-sm btn-secondary" role="button" id="rawResultsJsonLink">JSON
+          <span class="fas fa-download"></span>
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+
+  <ul id="traces"><li class="trace " data-traceid="ce8df8ba879bc1bc" data-duration="2246" data-timestamp="1550045550377000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/ce8df8ba879bc1bc">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">2.246s</span>
+            <span class="bar-label">8 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x2 2.246s</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x6 122ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:30.377+0300" title="02-13-2019T11:12:30.377+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="cf05d249fb84c177" data-duration="580" data-timestamp="1550045552679000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/cf05d249fb84c177">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:25%;"></span>
+            <span class="bar-label">580ms</span>
+            <span class="bar-label">24 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 580ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x23 513ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:32.679+0300" title="02-13-2019T11:12:32.679+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="e3978c1579ac2c98" data-duration="186" data-timestamp="1550045552680000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/e3978c1579ac2c98">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:8%;"></span>
+            <span class="bar-label">186ms</span>
+            <span class="bar-label">23 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 186ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x22 107ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:32.680+0300" title="02-13-2019T11:12:32.680+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="db71fc6e03e96a4d" data-duration="171" data-timestamp="1550045552668000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/db71fc6e03e96a4d">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:7%;"></span>
+            <span class="bar-label">171ms</span>
+            <span class="bar-label">21 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 171ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x20 120ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:32.668+0300" title="02-13-2019T11:12:32.668+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="593146f0b39c71fa" data-duration="123" data-timestamp="1550045552769000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/593146f0b39c71fa">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:5%;"></span>
+            <span class="bar-label">123ms</span>
+            <span class="bar-label">21 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 123ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x20 56ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:32.769+0300" title="02-13-2019T11:12:32.769+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="80abdd578b4aa27c" data-duration="43" data-timestamp="1550045555207000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/80abdd578b4aa27c">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:1%;"></span>
+            <span class="bar-label">43ms</span>
+            <span class="bar-label">18 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 43ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x17 25ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:35.207+0300" title="02-13-2019T11:12:35.207+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="5acfc8b958f28ebb" data-duration="41" data-timestamp="1550045555123000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/5acfc8b958f28ebb">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:1%;"></span>
+            <span class="bar-label">41ms</span>
+            <span class="bar-label">4 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 41ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x3 12ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:35.123+0300" title="02-13-2019T11:12:35.123+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="db29002f2e7fee40" data-duration="8" data-timestamp="1550045555183000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/db29002f2e7fee40">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:0%;"></span>
+            <span class="bar-label">8ms</span>
+            <span class="bar-label">4 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 8ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x3 2ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:35.183+0300" title="02-13-2019T11:12:35.183+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="fe028cba38c705be" data-duration="8" data-timestamp="1550045555173000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/fe028cba38c705be">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:0%;"></span>
+            <span class="bar-label">8ms</span>
+            <span class="bar-label">4 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 8ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x3 2ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:35.173+0300" title="02-13-2019T11:12:35.173+0300">25 minutes ago</time>
+        </div>
+      </li><li class="trace " data-traceid="6cb9b2ae92aa1ccd" data-duration="7" data-timestamp="1550045555165000" data-service-percentage="100">
+        <a href="http://localhost:9411/zipkin/traces/6cb9b2ae92aa1ccd">
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:0%;"></span>
+            <span class="bar-label">7ms</span>
+            <span class="bar-label">4 spans</span>
+          </div>
+          <div class="bar-block">
+            <span class="bar-graphic" style="width:100%;"></span>
+            <span class="bar-label">file system/172.21.0.3 100%</span>
+          </div>
+        </a>
+        <div class="trace-details services">
+            <span class="badge badge-success service-filter-label" data-service-name="file system/172.21.0.3">
+            file system/172.21.0.3 x1 7ms</span>
+            <span class="badge badge-success service-filter-label" data-service-name="fsclient/172.21.0.3">
+            fsclient/172.21.0.3 x3 2ms</span>
+        </div>
+        <div class="trace-details timestamp pull-right">
+          <time class="label timeago" datetime="02-13-2019T11:12:35.165+0300" title="02-13-2019T11:12:35.165+0300">25 minutes ago</time>
+        </div>
+      </li></ul>
+
+<!-- help panel for different lookup options -->
+<div class="modal fade" id="infoPanel" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" data-i18n="modal.title">How to find a trace</h4>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p data-i18n="modal.p1">So you want to find some traces, huh? Youve come to the right place!</p>
+
+        <h4 data-i18n="modal.title2">Service names</h4>
+        <p data-i18n="modal.p2">First off you have select a service to lookup by. All traces are indexed by service names.</p>
+        <p data-i18n="modal.p3">Once that is done you have three options to pick from. See notes on each below.</p>
+
+        <h4 data-i18n="modal.title3">1. Lookups by span name</h4>
+        <p data-i18n="modal.p4">Span names are generally RPC method names or Rails endpoints. This allows you to look up traces that accessed a particular part of the service.</p>
+
+        <h4 data-i18n="modal.title4">2. Lookups by annotation</h4>
+        <p data-i18n="modal.p5">An annotation is a point in time in the trace. It is assigned a string value, this is what you can look up by in this field. Could be things like</p> <strong>finagle.timeout</strong>
+
+        <h4 data-i18n="modal.title5">3. Lookups by tag</h4>
+        <p data-i18n="modal.p6">Tags are just extra metadata attached to a trace. This could be things like the url hit, response codes or exceptions. See below for a few examples.</p>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <td><strong>Key</strong></td>
+            <td><strong>Value</strong></td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>http.path</td>
+            <td>/1/trends/available.json</td>
+          </tr>
+          <tr>
+            <td>http.status_code</td>
+            <td>500</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <h4 data-i18n="modal.title6">Dates and limits</h4>
+        <p data-i18n="modal.p7">Zipkin allows you to pick a point in time to help us guide the selection of traces. When doing a lookup we return traces before that point in time up until the limit number of results.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="jsonPanel" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title"></h4>
+        <a href="http://localhost:9411/zipkin/#" class="save ml-5 btn btn-outline-dark">
+          <span class="fa fa-download fa-2x" style="color: black;" aria-hidden="true" aria-label="save"></span>
+        </a>
+        <a class="copy btn btn-outline-dark" id="copy2clipboard">
+          <span class="fa fa-copy fa-2x" style="color: black;" aria-hidden="true" aria-label="save"></span>
+        </a>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body bg-dark">
+        <pre><code class="text-light" id="trace-json-content"></code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+    <div id="fullPageSpinner">
+      <div class="fa-circle-notch fa-spin active">
+      </div>
+    </div>
+
+    <div class="ui-grid-a" id="extraButtonsContainer">
+      <div style="display: inline-block">
+        <button type="button" class="btn btn-danger btn-sm" id="zoomOutSpans" value="uiZoomOutSpans" style="display: none">
+          <i class="fas fa-search-minus"></i>
+        </button>
+      </div>
+      <div style="display: inline-block">
+        <button type="button" class="btn btn-default btn-sm back-to-top" id="backToTop" style="display: none">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+      </div>
+    </div>
+</div>
+</body></html>
